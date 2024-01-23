@@ -1,0 +1,43 @@
+<%- include('header') %>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 mb-4">
+            <div class="table-responsive ">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Actions</th>
+                            <!-- Add other table headers based on your data structure -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% contactData.map((contactval, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= contactval.name %></td>
+                                <td><%= contactval.email %></td>
+                                <td><%= contactval.phone %></td>
+                                <td><%= contactval.message %></td>
+                                <td>
+                                    <a href="/deleteContact?id=<%= contactval.id %>" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                                <!-- Add other table data cells here based on your data structure -->
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Your Contact form HTML here -->
+
+    </div>
+</div>
+
+<%- include('footer') %>
