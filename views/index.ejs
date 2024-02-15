@@ -83,8 +83,8 @@
                 <span> <a href="#" class="text-decoration-none text-dark"> <i class="fa-solid fa-user"></i> User</a>
                 </span>
                 <ul type="none" class="drop-item">
-                  <li><a href="login" class="text-decoration-none ">Log in</a></li>
-                  <li><a href="signup" class="text-decoration-none">Sign up</a></li>
+                  <li><a href="/login" class="text-decoration-none ">Log in</a></li>
+                  <li><a href="/signup" class="text-decoration-none">Sign up</a></li>
                 </ul>
 
               </div>
@@ -114,6 +114,22 @@
               </span>
             </div>
             <% }) %>
+
+            <% subcat.slice(0, 3).map((val, index)=> { %>
+              <div class="box <%= index === 0 ? 'active' : '' %>">
+                <img src="<%= val.categoryId.image %>" alt="img">
+                <i class="fa-solid fa-newspaper"></i>
+                <h4>
+                  <%= val.categoryId.category %>
+                </h4>
+                <p>
+                  <%= val.title %>
+                </p>
+                <span>
+                  <%= val.date %>
+                </span>
+              </div>
+              <% }) %>
         </div>
       </div>
     </div>
@@ -146,14 +162,14 @@
               </div>
               <div class="col-lg-6">
                 <div class="box-height">
-                  <% record.map((val)=>{ %>
+                  <% category.map((val)=>{ %>
                     <div class="right-news-box d-flex">
                       <div class="ima-box">
                         <img src="<%= val.image %>" alt="">
                       </div>
                       <div class="dis-box">
                         <h6 class="title">
-                          <%= val.title %>
+                          <%= val.categoty %>
                         </h6>
                         <span class="dis-date"><i class="fa-regular fa-clock"></i>
                           <%= val.date %>

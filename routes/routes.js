@@ -1,45 +1,38 @@
 const express = require('express')
-const route = express.Router();
+const route = express.Router()
 const multer = require('multer')
-const fs = require('fs')
 
-const adminController = require('../controller/adminController')
-const contactController = require('../controller/contactform')
+const IndexPageController = require('../controller/indexpageController')
+const CategoryController = require('../controller/CategoryController')
+const SubcategoryController = require('../controller/SubcategoryController');
+const ExSubcategoryController = require('../controller/excategoryController');
 
-const storage = multer.diskStorage({
-    destination:(req,files,cb)=>{
+// multer code 
+const fileUpload = multer({storage : multer.diskStorage({
+    destination : (req,file,cb)=>{
         cb(null,'uploads')
-        if(!fs.existsSync('uploads')){
-            fs.mkdirSync('uploads')
-        }
     },
-    filename:(req,file,cb)=>{
-        let fname = Date.now()+file.originalname;
-        cb(null,fname);
+    filename : (req,file,cb)=>{
+        let img = Date.now() + file.originalname;
+        cb(null,img);
     }
-})
+}
+)}).single('image')
 
-const uploadFile = multer({storage : storage}).single('image');
-
-route.get('/',adminController.indexPage);
-route.get('/admin',adminController.adminPage);
-route.get('/newsAdd',adminController.newsadd);
-route.post('/addNews',uploadFile,adminController.addNews);
-route.get('/deleteAdminData',uploadFile,adminController.deleteNews);
-route.get('/editAdminData',adminController.editNews);
-route.post('/UpdateNews',uploadFile,adminController.updateNews);
-
-route.get('/login',adminController.login);
-route.get('/signup',adminController.signup);
-route.post('/registerUser',adminController.register);
-route.post('/loginUser',adminController.loginuser);
-route.get('/logout',adminController.logout);
+// index page routes  
+route.get('/admin',IndexPageController.AdminIndexPage)
 
 
 
 
-route.post('/addcontact',adminController.addContact);
-route.get('/contact',adminController.viewcontact);
-route.get('/deleteContact',adminController.deleteConatact);
+
+// Extra subcategory route
+route.get('/exsubcategory',ExSubcategoryController.excategoryPage)
+route.get('/exsubcategoryAdd',ExSubcategoryController.exsubcategoryAdd)
+route.post('/newexsubCategoryAdd',fileUpload,ExSubcategoryController.newexsubCategoryAdd)
+route.get('/exsubcatedelete',fileUpload,ExSubcategoryController.exsubcatedelete)
+route.get('/exsubcateedit',fileUpload,ExSubcategoryController.editPage)
+route.post('/updateExcate',fileUpload,ExSubcategoryController.updateExcate)
+
 
 module.exports = route;

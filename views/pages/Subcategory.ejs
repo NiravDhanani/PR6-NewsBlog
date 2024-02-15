@@ -1,0 +1,65 @@
+<%- include('header') %>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mb-4">
+                <div class="table-responsive ">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Category image</th>
+                                <th scope="col">Subcate Name</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">subcat_image</th>
+                                <th scope="col">Action</th>
+                                <!-- Add other table headers based on your data structure -->
+                            </tr>
+                        </thead>
+
+                        <tbody >
+                            <% subcat.map((val,i)=>{i++ %> 
+                                <tr>
+                                    <td> <%= i %></td>
+                                    <td> <%= val.categoryId.cat_name %></td>
+                                    <td> <img src="<%= val.categoryId.cat_image %>" alt="" width="100px" height="100px"> </td>
+                                    <td> <%= val.subcat_name %> </td>
+                                    <td> <%= val.subcat_date %> </td>
+                                    <td> 
+                                        <img src="<%= val.subcat_image %>" alt="" width="100px" height="100px">
+                                    </td>
+                                    <td>
+                                        <a href="/deletesubcategory?id=<%= val.id %>" class="btn btn-danger text-white">Delete</a>
+                                        <a href="/editsubcategory?id=<%= val.id %>" class="btn btn-success text-white">Edit</a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="/subcategoryAdd"><button class="btn btn-success text-white">Add New SubCategory</button></a>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-warning  m-1">Car</a>
+                <a href="#" class="btn btn-danger text-white m-1">bike</a>
+                <a href="#" class="btn btn-secondary m-1">bus</a>
+            </div>
+
+            <!-- Your Contact form HTML here -->
+
+        </div>
+    </div>
+    <%- include('footer') %>
